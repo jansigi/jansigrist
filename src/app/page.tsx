@@ -11,14 +11,18 @@ import photoRandom1 from "@/image/random_picture.jpeg";
 import photoRandom2 from "@/image/random_picture_2.jpeg";
 import photoRandom3 from "@/image/random_picture_3.jpeg";
 import photoBike from "@/image/riding_gravel_bike.jpeg";
+import photoRunning from "@/image/running.jpeg";
+import photoProgramming from "@/image/programming.jpeg";
 
 export default function Home() {
   // Keep portrait for About only; exclude from slideshow/gallery
   const galleryImages = [
-    { src: photoGuitar1, alt: "Jan playing guitar" },
-    { src: photoRandom1, alt: "Random picture" },
     { src: photoGuitar2, alt: "Jan playing guitar (2)" },
+    { src: photoRandom1, alt: "Random picture" },
+    { src: photoProgramming, alt: "Jan Programming" },
     { src: photoRandom2, alt: "Random picture (2)" },
+    { src: photoRunning, alt: "Jan Running" },
+    { src: photoGuitar1, alt: "Jan playing guitar" },
     { src: photoBike, alt: "Jan riding a gravel bike" },
     { src: photoGuitar3, alt: "Jan playing guitar (3)" },
     { src: photoRandom3, alt: "Random picture (3)" },
@@ -136,24 +140,33 @@ export default function Home() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="mailto:jan.sigrist@gmx.net"
-              className="rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+              className="inline-flex items-center gap-2 rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
             >
-              Email Me
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                <path d="M1.5 6.75A2.25 2.25 0 0 1 3.75 4.5h16.5A2.25 2.25 0 0 1 22.5 6.75v10.5A2.25 2.25 0 0 1 20.25 19.5H3.75A2.25 2.25 0 0 1 1.5 17.25V6.75Zm3.383-.75a.75.75 0 0 0-.633 1.172l6.75 9.75a.75.75 0 0 0 1.2 0l6.75-9.75a.75.75 0 0 0-.633-1.172H4.883Z" />
+              </svg>
+              Email
             </Link>
             <Link
               href="https://www.linkedin.com/in/jan-sigrist-870224289/"
-              className="rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
               target="_blank"
               rel="noopener noreferrer"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                <path d="M4.983 3.5A2.484 2.484 0 1 0 5 8.468 2.484 2.484 0 0 0 4.983 3.5zM3 21h4V9H3v12zm7 0h4v-6.4c0-3.41-4-3.15-4 0V21zm5 0h4v-6.4c0-6.26-7-6-7-2.94V9h-4v12h4v-6.4c0-3.15 3-3.41 3 0V21z"/>
+              </svg>
               LinkedIn
             </Link>
             <Link
               href="https://github.com/jansigi"
-              className="rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
               target="_blank"
               rel="noopener noreferrer"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                <path fillRule="evenodd" d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.23 3.4 9.66 8.12 11.23.6.11.82-.26.82-.58v-2.1c-3.3.73-4-1.42-4-1.42-.55-1.45-1.35-1.84-1.35-1.84-1.1-.78.08-.76.08-.76 1.22.09 1.86 1.28 1.86 1.28 1.08 1.86 2.83 1.32 3.52 1.01.11-.8.42-1.33.76-1.63-2.63-.31-5.4-1.36-5.4-6.06 0-1.34.47-2.43 1.25-3.29-.13-.31-.54-1.58.12-3.3 0 0 1.01-.33 3.3 1.26a11.37 11.37 0 0 1 6 0c2.28-1.59 3.28-1.26 3.28-1.26.67 1.72.25 2.99.13 3.3.78.86 1.25 1.95 1.25 3.29 0 4.71-2.78 5.74-5.43 6.05.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.83.58A11.51 11.51 0 0 0 23.5 12.3 11.5 11.5 0 0 0 12 .5Z" clipRule="evenodd"/>
+              </svg>
               GitHub
             </Link>
           </div>
@@ -195,38 +208,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Projects */}
-        <section className="flex flex-col gap-4">
-          <h2 className="text-xl font-semibold tracking-tight">Projects</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <article className="rounded-xl border border-zinc-200 bg-white p-5 transition-colors hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800">
-              <h3 className="text-base font-medium">DOPE Query Builder</h3>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                A Kotlin-first, type-safe query builder for N1QL/SQL++ (Couchbase and compatibles).
-                Provides a fluent API with compile-time checks to reduce runtime errors. Currently a work in progress
-                and available via JitPack.
-              </p>
-              <div className="mt-3 flex flex-wrap gap-4 text-sm">
-                <Link
-                  href="https://github.com/ergon/dope-query-builder"
-                  className="text-zinc-900 underline underline-offset-2 hover:no-underline dark:text-zinc-100"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View repository
-                </Link>
-                <Link
-                  href="https://github.com/ergon/dope-query-builder/wiki/%5B0%5D-Setup-Guide"
-                  className="text-zinc-900 underline underline-offset-2 hover:no-underline dark:text-zinc-100"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Read the wiki
-                </Link>
-              </div>
-            </article>
-          </div>
-        </section>
+        {/* Projects moved to /it */}
+
 
         {/* Photos */}
         <section className="flex flex-col gap-4">
@@ -300,9 +283,6 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="mt-4 border-t border-zinc-200 pt-6 text-sm text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
-          © {new Date().getFullYear()} Jan Sigrist
-        </footer>
       </main>
 
       {lightboxOpen && (

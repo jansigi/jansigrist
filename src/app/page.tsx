@@ -181,7 +181,7 @@ export default function Home() {
               type="button"
               aria-label="Previous photos"
               onClick={() => setGridOffset((o) => (o - 1 + images.length) % images.length)}
-              className="pointer-events-auto absolute -left-10 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/60 p-4 text-3xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-left-16 dark:bg-zinc-100/20 dark:text-zinc-50"
+              className="pointer-events-auto absolute -left-2 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/60 p-3 text-2xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-left-10 sm:p-4 sm:text-3xl md:-left-16 dark:bg-zinc-100/20 dark:text-zinc-50"
             >
               ‹
             </button>
@@ -189,7 +189,7 @@ export default function Home() {
               type="button"
               aria-label="Next photos"
               onClick={() => setGridOffset((o) => (o + 1) % images.length)}
-              className="pointer-events-auto absolute -right-10 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/60 p-4 text-3xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-right-16 dark:bg-zinc-100/20 dark:text-zinc-50"
+              className="pointer-events-auto absolute -right-2 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/60 p-3 text-2xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-right-10 sm:p-4 sm:text-3xl md:-right-16 dark:bg-zinc-100/20 dark:text-zinc-50"
             >
               ›
             </button>
@@ -244,12 +244,13 @@ export default function Home() {
                 e.stopPropagation();
                 closeLightbox();
               }}
-              className="absolute right-6 top-0 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/60 text-xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:right-10 sm:top-1"
+              className="absolute right-3 top-0 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/60 text-xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:right-6"
+              style={{ top: "calc(env(safe-area-inset-top, 0px) + 2px)" }}
             >
               ×
             </button>
 
-            <div className="relative w-full" style={{ height: "70vh" }}>
+            <div className="relative w-full" style={{ height: "min(70svh, 70vh)" }}>
               <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-xl bg-transparent">
                 <Image
                   src={images[currentIndex].src}
@@ -263,7 +264,7 @@ export default function Home() {
                 type="button"
                 aria-label="Previous"
                 onClick={showPrev}
-                className="absolute top-1/2 -left-10 -translate-y-1/2 z-10 inline-flex h-16 w-16 items-center justify-center rounded-full bg-zinc-900/60 text-3xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-left-16 dark:bg-zinc-100/20"
+                className="absolute top-1/2 -left-2 -translate-y-1/2 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900/60 text-2xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-left-10 sm:h-16 sm:w-16 sm:text-3xl md:-left-16 dark:bg-zinc-100/20"
               >
                 ‹
               </button>
@@ -271,7 +272,7 @@ export default function Home() {
                 type="button"
                 aria-label="Next"
                 onClick={showNext}
-                className="absolute top-1/2 -right-10 -translate-y-1/2 z-10 inline-flex h-16 w-16 items-center justify-center rounded-full bg-zinc-900/60 text-3xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-right-16 dark:bg-zinc-100/20"
+                className="absolute top-1/2 -right-2 -translate-y-1/2 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900/60 text-2xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-right-10 sm:h-16 sm:w-16 sm:text-3xl md:-right-16 dark:bg-zinc-100/20"
               >
                 ›
               </button>

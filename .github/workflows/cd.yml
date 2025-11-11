@@ -22,8 +22,8 @@ jobs:
         with:
           node-version: 25.1.0
       - uses: actions/configure-pages@v5
-      - run: npx install --frozen-lockfile
-      - run: npx run build
+      - run: npm ci
+      - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

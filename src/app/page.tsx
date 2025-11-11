@@ -7,17 +7,21 @@ import photoPortrait from "@/image/portrait.jpeg";
 import photoGuitar1 from "@/image/playing_guitar.jpeg";
 import photoGuitar2 from "@/image/playing_guitar_2.jpeg";
 import photoGuitar3 from "@/image/playing_guitar_3.jpeg";
-import photoRandom from "@/image/random_picture.jpeg";
+import photoRandom1 from "@/image/random_picture.jpeg";
+import photoRandom2 from "@/image/random_picture_2.jpeg";
+import photoRandom3 from "@/image/random_picture_3.jpeg";
 import photoBike from "@/image/riding_gravel_bike.jpeg";
 
 export default function Home() {
   // Keep portrait for About only; exclude from slideshow/gallery
   const galleryImages = [
     { src: photoGuitar1, alt: "Jan playing guitar" },
-    { src: photoRandom, alt: "Random picture" },
+    { src: photoRandom1, alt: "Random picture" },
     { src: photoGuitar2, alt: "Jan playing guitar (2)" },
+    { src: photoRandom2, alt: "Random picture (2)" },
     { src: photoBike, alt: "Jan riding a gravel bike" },
     { src: photoGuitar3, alt: "Jan playing guitar (3)" },
+    { src: photoRandom3, alt: "Random picture (3)" },
   ];
 
   const [lightboxOpen, setLightboxOpen] = useState(false);

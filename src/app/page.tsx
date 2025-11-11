@@ -11,18 +11,22 @@ import photoRandom from "@/image/random_picture.jpeg";
 import photoBike from "@/image/riding_gravel_bike.jpeg";
 
 export default function Home() {
-  const images = [
-    { src: photoPortrait, alt: "Portrait of Jan Sigrist" },
+  // Keep portrait for About only; exclude from slideshow/gallery
+  const galleryImages = [
     { src: photoGuitar1, alt: "Jan playing guitar" },
-    { src: photoGuitar2, alt: "Jan playing guitar (2)" },
-    { src: photoGuitar3, alt: "Jan playing guitar (3)" },
     { src: photoRandom, alt: "Random picture" },
+    { src: photoGuitar2, alt: "Jan playing guitar (2)" },
     { src: photoBike, alt: "Jan riding a gravel bike" },
-  ] as const;
+    { src: photoGuitar3, alt: "Jan playing guitar (3)" },
+  ];
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [gridOffset, setGridOffset] = useState(0);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
+  const [touchDeltaX, setTouchDeltaX] = useState(0);
+  const [lbEntering, setLbEntering] = useState(true);
+  const [gridEntering, setGridEntering] = useState(true);
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
@@ -32,12 +36,12 @@ export default function Home() {
   const closeLightbox = () => setLightboxOpen(false);
 
   const showNext = useCallback(() => {
-    setCurrentIndex((i) => (i + 1) % images.length);
-  }, [images.length]);
+    setCurrentIndex((i) => (i + 1) % galleryImages.length);
+  }, [galleryImages.length]);
 
   const showPrev = useCallback(() => {
-    setCurrentIndex((i) => (i - 1 + images.length) % images.length);
-  }, [images.length]);
+    setCurrentIndex((i) => (i - 1 + galleryImages.length) % galleryImages.length);
+  }, [galleryImages.length]);
 
   useEffect(() => {
     if (!lightboxOpen) return;
@@ -50,7 +54,71 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKey);
   }, [lightboxOpen, showNext, showPrev]);
 
-  const visibleImages = Array.from({ length: 4 }, (_, i) => images[(i + gridOffset) % images.length]);
+  const visibleImages = Array.from({ length: 4 }, (_, i) => galleryImages[(i + gridOffset) % galleryImages.length]);
+
+  // Animate on lightbox image change
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    setLbEntering(false);
+    const id = requestAnimationFrame(() => setLbEntering(true));
+    return () => cancelAnimationFrame(id);
+  }, [currentIndex, lightboxOpen]);
+
+  // Animate grid change (especially on mobile)
+  useEffect(() => {
+    setGridEntering(false);
+    const id = requestAnimationFrame(() => setGridEntering(true));
+    return () => cancelAnimationFrame(id);
+  }, [gridOffset]);
+
+  // Touch helpers: Lightbox swipe
+  const onLightboxTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setTouchStart({ x: t.clientX, y: t.clientY });
+    setTouchDeltaX(0);
+  };
+  const onLightboxTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+    const t = e.touches[0];
+    const dx = t.clientX - touchStart.x;
+    const dy = t.clientY - touchStart.y;
+    // If horizontal gesture dominates, prevent scroll to improve feel
+    if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
+    setTouchDeltaX(dx);
+  };
+  const onLightboxTouchEnd = () => {
+    if (Math.abs(touchDeltaX) > 40) {
+      if (touchDeltaX < 0) showNext();
+      else showPrev();
+    }
+    setTouchStart(null);
+    setTouchDeltaX(0);
+  };
+
+  // Touch helpers: Grid swipe (phones)
+  const onGridTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setTouchStart({ x: t.clientX, y: t.clientY });
+    setTouchDeltaX(0);
+  };
+  const onGridTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+    const t = e.touches[0];
+    const dx = t.clientX - touchStart.x;
+    const dy = t.clientY - touchStart.y;
+    if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
+    setTouchDeltaX(dx);
+  };
+  const onGridTouchEnd = () => {
+    if (Math.abs(touchDeltaX) > 40) {
+      if (touchDeltaX < 0)
+        setGridOffset((o) => (o + 1) % galleryImages.length);
+      else
+        setGridOffset((o) => (o - 1 + galleryImages.length) % galleryImages.length);
+    }
+    setTouchStart(null);
+    setTouchDeltaX(0);
+  };
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-black dark:text-zinc-100">
@@ -159,14 +227,21 @@ export default function Home() {
         {/* Photos */}
         <section className="flex flex-col gap-4">
           <h2 className="text-xl font-semibold tracking-tight">Photos</h2>
-          <div className="relative">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div
+            className="relative px-8 sm:px-10 md:px-14"
+            onTouchStart={onGridTouchStart}
+            onTouchMove={onGridTouchMove}
+            onTouchEnd={onGridTouchEnd}
+          >
+            <div className={`grid grid-cols-1 gap-3 sm:grid-cols-4 sm:gap-4 transition-all duration-300 ease-out ${
+              gridEntering ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+            }`}>
               {visibleImages.map((img, idx) => (
                 <button
                   key={`${img.alt}-${idx}`}
                   type="button"
-                  onClick={() => openLightbox((idx + gridOffset) % images.length)}
-                  className="group relative aspect-square overflow-hidden rounded-xl bg-white shadow-sm outline-none transition hover:shadow-md focus-visible:ring-2 focus-visible:ring-zinc-950/70 dark:bg-zinc-900 dark:focus-visible:ring-zinc-50/70"
+                  onClick={() => openLightbox((idx + gridOffset) % galleryImages.length)}
+                  className={`group relative aspect-square overflow-hidden rounded-xl bg-white shadow-sm outline-none transition hover:shadow-md focus-visible:ring-2 focus-visible:ring-zinc-950/70 dark:bg-zinc-900 dark:focus-visible:ring-zinc-50/70 ${idx > 0 ? "hidden sm:block" : "block"}`}
                 >
                   <Image
                     src={img.src}
@@ -180,16 +255,16 @@ export default function Home() {
             <button
               type="button"
               aria-label="Previous photos"
-              onClick={() => setGridOffset((o) => (o - 1 + images.length) % images.length)}
-              className="pointer-events-auto absolute -left-2 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/60 p-3 text-2xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-left-10 sm:p-4 sm:text-3xl md:-left-16 dark:bg-zinc-100/20 dark:text-zinc-50"
+              onClick={() => setGridOffset((o) => (o - 1 + galleryImages.length) % galleryImages.length)}
+              className="pointer-events-auto absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/60 text-zinc-100 shadow-sm backdrop-blur transition hover:bg-zinc-900/80 dark:bg-zinc-100/20 dark:text-zinc-50 h-12 w-12 text-2xl sm:h-14 sm:w-14 sm:text-3xl md:h-16 md:w-16"
             >
               ‹
             </button>
             <button
               type="button"
               aria-label="Next photos"
-              onClick={() => setGridOffset((o) => (o + 1) % images.length)}
-              className="pointer-events-auto absolute -right-2 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/60 p-3 text-2xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-right-10 sm:p-4 sm:text-3xl md:-right-16 dark:bg-zinc-100/20 dark:text-zinc-50"
+              onClick={() => setGridOffset((o) => (o + 1) % galleryImages.length)}
+              className="pointer-events-auto absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/60 text-zinc-100 shadow-sm backdrop-blur transition hover:bg-zinc-900/80 dark:bg-zinc-100/20 dark:text-zinc-50 h-12 w-12 text-2xl sm:h-14 sm:w-14 sm:text-3xl md:h-16 md:w-16"
             >
               ›
             </button>
@@ -250,11 +325,24 @@ export default function Home() {
               ×
             </button>
 
-            <div className="relative w-full" style={{ height: "min(70svh, 70vh)" }}>
-              <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-xl bg-transparent">
+            <div
+              className="relative w-full px-6 sm:px-10 md:px-16"
+              style={{ height: "min(70svh, 70vh)" }}
+              onTouchStart={onLightboxTouchStart}
+              onTouchMove={onLightboxTouchMove}
+              onTouchEnd={onLightboxTouchEnd}
+            >
+              <div
+                className={`flex h-full w-full items-center justify-center overflow-hidden rounded-xl bg-transparent transition-all duration-300 ease-out ${
+                  lbEntering && touchDeltaX === 0 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-3"
+                }`}
+                style={{
+                  transform: touchDeltaX !== 0 ? `translateX(${touchDeltaX}px)` : undefined,
+                }}
+              >
                 <Image
-                  src={images[currentIndex].src}
-                  alt={images[currentIndex].alt}
+                  src={galleryImages[currentIndex].src}
+                  alt={galleryImages[currentIndex].alt}
                   className="h-full w-auto max-w-full object-contain"
                   sizes="(max-width: 768px) 100vw, 80vw"
                   priority
@@ -264,7 +352,7 @@ export default function Home() {
                 type="button"
                 aria-label="Previous"
                 onClick={showPrev}
-                className="absolute top-1/2 -left-2 -translate-y-1/2 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900/60 text-2xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-left-10 sm:h-16 sm:w-16 sm:text-3xl md:-left-16 dark:bg-zinc-100/20"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center rounded-full bg-zinc-900/60 text-zinc-100 shadow-sm backdrop-blur transition hover:bg-zinc-900/80 dark:bg-zinc-100/20 h-12 w-12 text-2xl sm:h-14 sm:w-14 sm:text-3xl md:h-16 md:w-16"
               >
                 ‹
               </button>
@@ -272,14 +360,14 @@ export default function Home() {
                 type="button"
                 aria-label="Next"
                 onClick={showNext}
-                className="absolute top-1/2 -right-2 -translate-y-1/2 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900/60 text-2xl text-zinc-100 backdrop-blur transition hover:bg-zinc-900/80 sm:-right-10 sm:h-16 sm:w-16 sm:text-3xl md:-right-16 dark:bg-zinc-100/20"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center rounded-full bg-zinc-900/60 text-zinc-100 shadow-sm backdrop-blur transition hover:bg-zinc-900/80 dark:bg-zinc-100/20 h-12 w-12 text-2xl sm:h-14 sm:w-14 sm:text-3xl md:h-16 md:w-16"
               >
                 ›
               </button>
             </div>
 
-            <div className="flex w-full items-center justify-center gap-3 overflow-x-auto pb-1" style={{height: "5rem"}}>
-              {images.map((img, idx) => (
+              <div className="flex w-full items-center justify-center gap-3 overflow-x-auto pb-1" style={{height: "5rem"}}>
+              {galleryImages.map((img, idx) => (
                 <button
                   key={idx}
                   type="button"

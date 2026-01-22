@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jan Sigrist — Personal Page",
+  title: "Jan Sigrist",
   description: "Personal website for Jan Sigrist",
 };
 
@@ -57,7 +57,7 @@ export default function RootLayout({
         {children}
 
         <footer className="border-t border-zinc-200 bg-zinc-50 py-6 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-black dark:text-zinc-400">
-          <div className="mx-auto w-full max-w-4xl px-6 sm:px-10">© 2025 Jan Sigrist</div>
+          <div className="mx-auto w-full max-w-4xl px-6 sm:px-10">© 2026 Jan Sigrist</div>
         </footer>
       </body>
     </html>

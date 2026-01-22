@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Music — Jan Sigrist",
+  title: "Jan Sigrist - Music",
   description: "Music by Jan Sigrist — YouTube and Spotify embeds.",
 };
 
 export default function MusicPage() {
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-black dark:text-zinc-100">
-      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24">
+      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-12 sm:gap-12 sm:px-10 sm:py-16">
         <header className="flex items-end justify-between gap-4">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Music</h1>
           <Link
@@ -84,4 +84,3 @@ export default function MusicPage() {
     </div>
   );
 }
-

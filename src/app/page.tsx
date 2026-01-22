@@ -130,7 +130,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-black dark:text-zinc-100">
-      <main className="mx-auto flex w-full max-w-4xl flex-col gap-16 px-6 py-16 sm:px-10 sm:py-24">
+      <main className="mx-auto flex w-full max-w-4xl flex-col gap-16 px-6 py-12 sm:px-10 sm:py-16">
         {/* Hero */}
         <section className="flex flex-col items-start gap-6">
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">Jan Sigrist</h1>
@@ -172,6 +172,8 @@ export default function Home() {
           </div>
         </section>
 
+        
+
         {/* About */}
         <section className="grid grid-cols-1 items-start gap-8 sm:grid-cols-5">
           <div className="relative col-span-2 aspect-[4/5] overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
@@ -186,7 +188,11 @@ export default function Home() {
           <div className="col-span-3 flex flex-col gap-4">
             <h2 className="text-xl font-semibold tracking-tight">About</h2>
             <p className="text-zinc-700 dark:text-zinc-300">
-              Personal page for Jan Sigrist. Find my links below and feel free to reach out.
+              Personal page for Jan Sigrist. Explore the
+              {' '}<Link href="/it" className="underline underline-offset-2 hover:no-underline">IT</Link>{' '}
+              and{' '}
+              <Link href="/music" className="underline underline-offset-2 hover:no-underline">Music</Link>{' '}
+              pages, or find my links below and feel free to reach out.
             </p>
             <ul className="mt-2 grid grid-cols-1 gap-2 text-sm text-zinc-600 dark:text-zinc-400 sm:grid-cols-2">
               <li>• Location: Zürich, Switzerland</li>

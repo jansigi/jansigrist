@@ -188,7 +188,7 @@ export default function Home() {
           <div className="col-span-3 flex flex-col gap-4">
             <h2 className="text-xl font-semibold tracking-tight">About</h2>
             <p className="text-zinc-700 dark:text-zinc-300">
-              Personal page for Jan Sigrist. Explore the
+              My personal page. Explore the
               {' '}<Link href="/it" className="underline underline-offset-2 hover:no-underline">IT</Link>{' '}
               and{' '}
               <Link href="/music" className="underline underline-offset-2 hover:no-underline">Music</Link>{' '}

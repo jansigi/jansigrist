@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import photoPortrait from "@/image/portrait.jpeg";
+import photoPortrait from "@/image/portrait.png";
 import photoGuitar1 from "@/image/playing_guitar.jpeg";
 import photoGuitar2 from "@/image/playing_guitar_2.jpeg";
 import photoGuitar3 from "@/image/playing_guitar_3.jpeg";
@@ -11,7 +11,6 @@ import photoRandom1 from "@/image/random_picture.jpeg";
 import photoRandom2 from "@/image/random_picture_2.jpeg";
 import photoRandom3 from "@/image/random_picture_3.jpeg";
 import photoBike from "@/image/riding_gravel_bike.jpeg";
-import photoRunning from "@/image/running.jpeg";
 import photoProgramming from "@/image/programming.jpeg";
 
 export default function Home() {
@@ -21,7 +20,6 @@ export default function Home() {
     { src: photoRandom1, alt: "Random picture" },
     { src: photoProgramming, alt: "Jan Programming" },
     { src: photoRandom2, alt: "Random picture (2)" },
-    { src: photoRunning, alt: "Jan Running" },
     { src: photoGuitar1, alt: "Jan playing guitar" },
     { src: photoBike, alt: "Jan riding a gravel bike" },
     { src: photoGuitar3, alt: "Jan playing guitar (3)" },

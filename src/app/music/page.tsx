@@ -50,6 +50,48 @@ export default function MusicPage() {
           </div>
         </section>
 
+        {/* More Videos */}
+        <section className="flex flex-col gap-3">
+          <h2 className="text-base font-medium">More Videos</h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {[
+              "LTvKfoY5Tco",
+              "1BoKgVH5TQs",
+              "-c6-8CMND9E",
+              "yvsbNPi66yY",
+            ].map((id) => (
+              <div
+                key={id}
+                className="rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900"
+              >
+                <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
+                  <iframe
+                    className="absolute inset-0 h-full w-full"
+                    src={`https://www.youtube.com/embed/${id}`}
+                    title="YouTube video player"
+                    frameBorder={0}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                  Watch on {""}
+                  <Link
+                    href={`https://youtu.be/${id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:no-underline"
+                  >
+                    YouTube
+                  </Link>
+                  .
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Spotify */}
         <section className="flex flex-col gap-3">
           <h2 className="text-base font-medium">Spotify</h2>

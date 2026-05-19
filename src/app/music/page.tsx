@@ -1,128 +1,123 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Jan Sigrist - Music",
-  description: "Music by Jan Sigrist — YouTube and Spotify embeds.",
-};
+import Link from "next/link";
+import { useState } from "react";
+
+const YOUTUBE_VIDEOS: { id: string; featured?: boolean }[] = [
+  { id: "B5OhAnngxu8", featured: true },
+  { id: "LTvKfoY5Tco" },
+  { id: "1BoKgVH5TQs" },
+  { id: "-c6-8CMND9E" },
+  { id: "yvsbNPi66yY" },
+];
 
 export default function MusicPage() {
+  const [activeVideo, setActiveVideo] = useState(YOUTUBE_VIDEOS[0].id);
+
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-black dark:text-zinc-100">
-      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-12 sm:gap-12 sm:px-10 sm:py-16">
-        <header className="flex items-end justify-between gap-4">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Music</h1>
-          <Link
-            href="/"
-            className="rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
+    <section className="px-6 py-16 sm:px-10">
+      <div className="mx-auto w-full max-w-[1100px]">
+        <div className="mb-14 fade-in-up">
+          <h1
+            className="mb-3 text-[var(--color-fg-strong)]"
+            style={{
+              fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+            }}
           >
-            Back to Home
-          </Link>
-        </header>
+            Music
+          </h1>
+          <p className="text-base leading-relaxed text-[var(--color-muted)]">
+            Guitar, piano, bass, drums — on YouTube &amp; Spotify.
+          </p>
+        </div>
 
-        {/* YouTube */}
-        <section className="flex flex-col gap-3">
-          <h2 className="text-base font-medium">Featured Video</h2>
-          <div className="rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
-            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
-              <iframe
-                className="absolute inset-0 h-full w-full"
-                src="https://www.youtube.com/embed/B5OhAnngxu8?si=0OmP9nzvwo1-byR-"
-                title="YouTube video player"
-                frameBorder={0}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </div>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              Watch on {""}
-              <Link
-                href="https://youtu.be/B5OhAnngxu8?si=0OmP9nzvwo1-byR-"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 hover:no-underline"
-              >
-                YouTube
-              </Link>
-              .
-            </p>
+        {/* Featured video */}
+        <div className="mb-6">
+          <div className="relative overflow-hidden rounded-2xl border border-[var(--color-border)] pb-[56.25%]">
+            <iframe
+              key={activeVideo}
+              src={`https://www.youtube.com/embed/${activeVideo}?autoplay=0`}
+              title="Jan Sigrist Music"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="absolute inset-0 h-full w-full"
+            />
           </div>
-        </section>
+          <p className="mt-3 text-sm text-[var(--color-muted)]">
+            Watch on{" "}
+            <Link
+              href={`https://youtu.be/${activeVideo}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-accent)] hover:underline"
+            >
+              YouTube
+            </Link>
+            .
+          </p>
+        </div>
 
-        {/* More Videos */}
-        <section className="flex flex-col gap-3">
-          <h2 className="text-base font-medium">More Videos</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {[
-              "LTvKfoY5Tco",
-              "1BoKgVH5TQs",
-              "-c6-8CMND9E",
-              "yvsbNPi66yY",
-            ].map((id) => (
-              <div
-                key={id}
-                className="rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900"
+        {/* Thumbnails */}
+        <div className="mb-16 flex gap-3 overflow-x-auto pb-2">
+          {YOUTUBE_VIDEOS.map((v) => {
+            const active = v.id === activeVideo;
+            return (
+              <button
+                key={v.id}
+                type="button"
+                onClick={() => setActiveVideo(v.id)}
+                className={`relative h-[90px] w-[160px] flex-shrink-0 overflow-hidden rounded-lg border-2 transition-colors ${
+                  active
+                    ? "border-[var(--color-accent)]"
+                    : "border-[var(--color-border)] hover:border-[var(--color-accent-glow)]"
+                }`}
               >
-                <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
-                  <iframe
-                    className="absolute inset-0 h-full w-full"
-                    src={`https://www.youtube.com/embed/${id}`}
-                    title="YouTube video player"
-                    frameBorder={0}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  Watch on {""}
-                  <Link
-                    href={`https://youtu.be/${id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline underline-offset-2 hover:no-underline"
-                  >
-                    YouTube
-                  </Link>
-                  .
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`}
+                  alt="Video thumbnail"
+                  className="h-full w-full object-cover"
+                />
+                {v.featured && (
+                  <span className="absolute left-1.5 top-1.5 rounded bg-[var(--color-accent)] px-1.5 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-[var(--color-on-accent)]">
+                    Featured
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
 
         {/* Spotify */}
-        <section className="flex flex-col gap-3">
-          <h2 className="text-base font-medium">Spotify</h2>
-          <div className="rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
-            <div className="overflow-hidden rounded-lg">
-              <iframe
-                style={{ borderRadius: 12 }}
-                src="https://open.spotify.com/embed/artist/0lU1CwTbKNiyagnPBawvtk?utm_source=generator&theme=0"
-                width="100%"
-                height="352"
-                frameBorder="0"
-                allowFullScreen
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-              />
-            </div>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              Open on {""}
-              <Link
-                href="https://open.spotify.com/intl-de/artist/0lU1CwTbKNiyagnPBawvtk?si=qhIbLHRXTmK7JCAwMs2Jbw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 hover:no-underline"
-              >
-                Spotify
-              </Link>
-              .
-            </p>
+        <div>
+          <h3 className="subheading mb-6 block">Spotify</h3>
+          <div className="overflow-hidden rounded-2xl border border-[var(--color-border)]">
+            <iframe
+              src="https://open.spotify.com/embed/artist/0lU1CwTbKNiyagnPBawvtk?utm_source=generator&theme=0"
+              width="100%"
+              height="352"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              className="block"
+            />
           </div>
-        </section>
-      </main>
-    </div>
+          <p className="mt-3 text-sm text-[var(--color-muted)]">
+            Open on{" "}
+            <Link
+              href="https://open.spotify.com/intl-de/artist/0lU1CwTbKNiyagnPBawvtk?si=qhIbLHRXTmK7JCAwMs2Jbw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-accent)] hover:underline"
+            >
+              Spotify
+            </Link>
+            .
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }

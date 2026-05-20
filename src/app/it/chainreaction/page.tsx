@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Download Chain Reaction — Jan Sigrist",
+  title: "Download Chain Reaction | Jan Sigrist",
   description: "Download the Chain Reaction JAR.",
 };
 

@@ -29,7 +29,7 @@ export default function MusicPage() {
             Music
           </h1>
           <p className="text-base leading-relaxed text-[var(--color-muted)]">
-            Guitar, piano, bass, drums — on YouTube &amp; Spotify.
+            Guitar, piano, bass, drums, on YouTube &amp; Spotify.
           </p>
         </div>
 

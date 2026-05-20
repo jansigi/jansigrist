@@ -20,7 +20,7 @@
   color-scheme: dark;
 }
 
-/* Light mode — follows OS preference */
+/* Light mode: follows OS preference */
 @media (prefers-color-scheme: light) {
   :root {
     --color-bg: #f7f8fa;

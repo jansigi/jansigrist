@@ -57,7 +57,7 @@ const PROJECTS: {
     ],
   },
   {
-    name: "TagAlarm — NFC Alarm Clock",
+    name: "TagAlarm: NFC Alarm Clock",
     desc: "Alarm clock that only dismisses with a pre-registered NFC tag. Uses Alarm Manager and platform APIs for reliable scheduling.",
     tags: ["Android", "NFC", "Kotlin"],
     links: [
@@ -91,7 +91,7 @@ const PROJECTS: {
   },
   {
     name: "Gym Tracker",
-    desc: "Desktop app for tracking workouts (sets, exercises, weights) built with Kotlin Compose Multiplatform. ICT Regional 2025 — 1st place.",
+    desc: "Desktop app for tracking workouts (sets, exercises, weights) built with Kotlin Compose Multiplatform. ICT Regional 2025: 1st place.",
     tags: ["Kotlin", "Compose", "Desktop"],
     links: [{ label: "Repository", href: "https://github.com/jansigi/rm-2025" }],
     highlight: true,
@@ -162,7 +162,7 @@ export default function ITPage() {
                   <span
                     className="absolute right-5 top-5 inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent-dim)] text-[var(--color-accent)]"
                     aria-label="Award winner"
-                    title="ICT Regional 2025 — 1st place"
+                    title="ICT Regional 2025: 1st place"
                   >
                     <IconTrophy className="h-5 w-5" />
                   </span>

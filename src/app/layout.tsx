@@ -5,7 +5,7 @@ import SiteFooter from "./SiteFooter";
 
 export const metadata: Metadata = {
   title: "Jan Sigrist",
-  description: "Personal website — IT projects and music.",
+  description: "Personal website. IT projects and music.",
 };
 
 export default function RootLayout({

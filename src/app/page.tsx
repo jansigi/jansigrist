@@ -42,7 +42,7 @@ const QUICK_CARDS: { icon: Icon; label: string; desc: string; href: string }[] =
   {
     icon: IconMusic,
     label: "Music",
-    desc: "Guitar, piano, bass, drums — YouTube & Spotify.",
+    desc: "Guitar, piano, bass, drums. YouTube & Spotify.",
     href: "/music",
   },
   {
@@ -188,15 +188,15 @@ export default function Home() {
     <div>
       {/* HERO */}
       <section className="relative flex min-h-[88vh] items-center overflow-hidden px-6 py-16 sm:px-10">
-        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-2 items-start gap-6 sm:gap-10 md:items-center md:gap-12">
-          <div className="fade-in-up">
+        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-2 items-center gap-x-6 gap-y-8 md:gap-x-12 md:gap-y-4">
+          <div className="fade-in-up col-start-1 row-start-1">
             <p className="mb-5 text-[0.78rem] uppercase tracking-[0.14em] text-[var(--color-accent)]">
               Based in Zürich, Switzerland
             </p>
             <h1
-              className="mb-6 text-[var(--color-fg-strong)]"
+              className="text-[var(--color-fg-strong)]"
               style={{
-                fontSize: "clamp(2.5rem, 7vw, 6rem)",
+                fontSize: "clamp(2.5rem, 8vw, 6rem)",
                 fontWeight: 700,
                 lineHeight: 0.95,
                 letterSpacing: "-0.04em",
@@ -206,8 +206,11 @@ export default function Home() {
               <br />
               <span className="text-[var(--color-accent)]">Sigrist</span>
             </h1>
+          </div>
+
+          <div className="fade-in-up col-span-2 row-start-2 md:col-span-1 md:col-start-1 md:row-start-2">
             <p className="mb-8 max-w-md text-base leading-relaxed text-[var(--color-muted)]">
-              Apprentice software developer at Ergon Informatik AG — building
+              Apprentice software developer at Ergon Informatik AG, building
               full-stack apps, Android tools, and musician on the side.
             </p>
             <div className="mb-7 flex flex-wrap gap-3">
@@ -242,13 +245,13 @@ export default function Home() {
           </div>
 
           <div
-            className="fade-in relative flex items-center justify-center md:min-h-[340px]"
+            className="fade-in relative col-start-2 row-start-1 flex items-center justify-center md:row-span-2 md:min-h-[340px]"
           >
             <div
-              className="flex h-[150px] w-[150px] items-center justify-center rounded-full border-2 border-[var(--color-accent)] sm:h-[200px] sm:w-[200px] md:h-60 md:w-60"
+              className="flex h-[140px] w-[140px] flex-shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-accent)] sm:h-[200px] sm:w-[200px] md:h-60 md:w-60"
               style={{ boxShadow: "0 0 60px var(--color-accent-glow)" }}
             >
-              <div className="relative h-[134px] w-[134px] overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:h-[180px] sm:w-[180px] md:h-[216px] md:w-[216px]">
+              <div className="relative h-[122px] w-[122px] flex-shrink-0 overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:h-[180px] sm:w-[180px] md:h-[216px] md:w-[216px]">
                 <Image
                   src={photoPortrait}
                   alt="Portrait of Jan Sigrist"
@@ -526,7 +529,7 @@ export default function Home() {
           </div>
 
           <p className="mt-6 text-center text-sm text-[var(--color-muted)]">
-            Based in Zürich — open to questions, collabs, and new connections.
+            Based in Zürich. Open to questions, collabs, and new connections.
           </p>
         </div>
       </section>

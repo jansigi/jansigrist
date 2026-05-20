@@ -171,7 +171,7 @@ export function IconDownload(props: IconProps) {
   );
 }
 
-/* Brand logos — solid fill, official paths. */
+/* Brand logos: solid fill, official paths. */
 
 export function IconGitHub(props: IconProps) {
   return (

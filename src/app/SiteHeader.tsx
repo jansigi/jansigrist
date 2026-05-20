@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType, type SVGProps } from "react";
+import { IconCode, IconHome, IconMusic } from "./icons";
 
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "IT", href: "/it" },
-  { label: "Music", href: "/music" },
+type NavIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
+const NAV_LINKS: { label: string; href: string; icon: NavIcon }[] = [
+  { label: "Home", href: "/", icon: IconHome },
+  { label: "IT", href: "/it", icon: IconCode },
+  { label: "Music", href: "/music", icon: IconMusic },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -91,17 +94,34 @@ export default function SiteHeader() {
       </nav>
 
       {menuOpen && (
-        <div className="fixed inset-x-0 top-[64px] z-40 flex flex-col border-b border-[var(--color-border)] bg-[var(--color-bg)] px-6 py-4 md:hidden">
-          {NAV_LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={closeMenu}
-              className="border-b border-[var(--color-border)] py-3 text-[var(--color-text)] last:border-b-0"
-            >
-              {l.label}
-            </Link>
-          ))}
+        <div className="fixed inset-x-0 top-[64px] z-40 flex flex-col gap-1 border-b border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-3 md:hidden">
+          {NAV_LINKS.map((l) => {
+            const Icon = l.icon;
+            const active = isActive(pathname, l.href);
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={closeMenu}
+                className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors ${
+                  active
+                    ? "bg-[var(--color-accent-dim)] text-[var(--color-accent)]"
+                    : "text-[var(--color-text)] hover:bg-[var(--color-surface-alt)]"
+                }`}
+              >
+                <span
+                  className={`inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md ${
+                    active
+                      ? "bg-[var(--color-accent)] text-[var(--color-bg)]"
+                      : "bg-[var(--color-surface-alt)] text-[var(--color-accent)]"
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                </span>
+                <span>{l.label}</span>
+              </Link>
+            );
+          })}
         </div>
       )}
     </>

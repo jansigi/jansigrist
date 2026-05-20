@@ -188,7 +188,7 @@ export default function Home() {
     <div>
       {/* HERO */}
       <section className="relative flex min-h-[88vh] items-center overflow-hidden px-6 py-16 sm:px-10">
-        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 items-center gap-12 md:grid-cols-2">
+        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-2 items-start gap-6 sm:gap-10 md:items-center md:gap-12">
           <div className="fade-in-up">
             <p className="mb-5 text-[0.78rem] uppercase tracking-[0.14em] text-[var(--color-accent)]">
               Based in Zürich, Switzerland
@@ -196,7 +196,7 @@ export default function Home() {
             <h1
               className="mb-6 text-[var(--color-fg-strong)]"
               style={{
-                fontSize: "clamp(3.5rem, 7vw, 6rem)",
+                fontSize: "clamp(2.5rem, 7vw, 6rem)",
                 fontWeight: 700,
                 lineHeight: 0.95,
                 letterSpacing: "-0.04em",
@@ -242,13 +242,13 @@ export default function Home() {
           </div>
 
           <div
-            className="fade-in relative hidden min-h-[340px] items-center justify-center md:flex"
+            className="fade-in relative flex items-center justify-center md:min-h-[340px]"
           >
             <div
-              className="flex h-[240px] w-[240px] items-center justify-center rounded-full border-2 border-[var(--color-accent)]"
+              className="flex h-[150px] w-[150px] items-center justify-center rounded-full border-2 border-[var(--color-accent)] sm:h-[200px] sm:w-[200px] md:h-60 md:w-60"
               style={{ boxShadow: "0 0 60px var(--color-accent-glow)" }}
             >
-              <div className="relative h-[216px] w-[216px] overflow-hidden rounded-full bg-[var(--color-surface-alt)]">
+              <div className="relative h-[134px] w-[134px] overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:h-[180px] sm:w-[180px] md:h-[216px] md:w-[216px]">
                 <Image
                   src={photoPortrait}
                   alt="Portrait of Jan Sigrist"
@@ -258,15 +258,15 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="float absolute right-0 top-[10%] flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text)]">
+            <div className="float absolute right-0 top-[10%] hidden items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text)] sm:flex">
               <IconSwissFlag className="h-4 w-4 rounded-sm" />
               Zürich
             </div>
-            <div className="float-delay absolute bottom-[15%] right-[5%] flex items-center gap-2 rounded-lg border border-[var(--color-accent-dim)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-accent)]">
+            <div className="float-delay absolute bottom-[15%] right-[5%] hidden items-center gap-2 rounded-lg border border-[var(--color-accent-dim)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-accent)] sm:flex">
               <IconKotlin className="h-4 w-4" />
               Kotlin
             </div>
-            <div className="float absolute left-[-5%] top-[20%] flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text)]">
+            <div className="float absolute left-[-5%] top-[20%] hidden items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text)] sm:flex">
               <IconMusic className="h-4 w-4 text-[var(--color-accent)]" />
               Music
             </div>

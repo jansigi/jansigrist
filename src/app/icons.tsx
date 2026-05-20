@@ -113,6 +113,15 @@ export function IconCube(props: IconProps) {
   );
 }
 
+export function IconHome(props: IconProps) {
+  return (
+    <svg {...stroke} {...props}>
+      <path d="M3 11 12 3l9 8" />
+      <path d="M5 10v10h5v-6h4v6h5V10" />
+    </svg>
+  );
+}
+
 export function IconMail(props: IconProps) {
   return (
     <svg {...stroke} {...props}>

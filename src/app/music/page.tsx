@@ -18,24 +18,19 @@ export default function MusicPage() {
     <section className="px-6 py-16 sm:px-10">
       <div className="mx-auto w-full max-w-[1100px]">
         <div className="mb-14 fade-in-up">
-          <h1
-            className="mb-3 text-[var(--color-fg-strong)]"
-            style={{
-              fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            Music
+          <span className="eyebrow mb-5 block">Music</span>
+          <h1 className="display text-[clamp(2.6rem,7vw,5rem)]" style={{ fontWeight: 800 }}>
+            What I play<span className="text-[var(--color-accent)]">.</span>
           </h1>
-          <p className="text-base leading-relaxed text-[var(--color-muted)]">
-            Guitar, piano, bass, drums, on YouTube &amp; Spotify.
+          <p className="mt-5 max-w-xl text-[1.1rem] leading-relaxed text-[var(--color-muted)]">
+            Guitar, piano, bass and drums. Some of my playing, on YouTube and
+            Spotify.
           </p>
         </div>
 
         {/* Featured video */}
         <div className="mb-6">
-          <div className="relative overflow-hidden rounded-2xl border border-[var(--color-border)] pb-[56.25%]">
+          <div className="relative overflow-hidden rounded-[3px] border border-[var(--color-border)] pb-[56.25%]">
             <iframe
               key={activeVideo}
               src={`https://www.youtube.com/embed/${activeVideo}?autoplay=0`}
@@ -94,7 +89,7 @@ export default function MusicPage() {
         {/* Spotify */}
         <div>
           <h3 className="subheading mb-6 block">Spotify</h3>
-          <div className="overflow-hidden rounded-2xl border border-[var(--color-border)]">
+          <div className="overflow-hidden rounded-[3px] border border-[var(--color-border)]">
             <iframe
               src="https://open.spotify.com/embed/artist/0lU1CwTbKNiyagnPBawvtk?utm_source=generator&theme=0"
               width="100%"

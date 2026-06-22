@@ -108,24 +108,22 @@ export default function ITPage() {
     <section className="px-6 py-16 sm:px-10">
       <div className="mx-auto w-full max-w-[1100px]">
         <div className="mb-14 fade-in-up">
-          <h1
-            className="mb-3 text-[var(--color-fg-strong)]"
-            style={{
-              fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            IT &amp; Projects
+          <span className="eyebrow mb-5 block">IT &amp; Projects</span>
+          <h1 className="display text-[clamp(2.6rem,7vw,5rem)]" style={{ fontWeight: 800 }}>
+            What I build<span className="text-[var(--color-accent)]">.</span>
           </h1>
-          <p className="text-base leading-relaxed text-[var(--color-muted)]">
-            Skills, tools, and things I&apos;ve built.
+          <p className="mt-5 max-w-xl text-[1.1rem] leading-relaxed text-[var(--color-muted)]">
+            The stack I work in, and a selection of projects from my apprenticeship
+            and free time.
           </p>
         </div>
 
         {/* Skills */}
         <div className="mb-16">
-          <h3 className="subheading mb-6 block">Skills</h3>
+          <div className="mb-8 flex items-center gap-4">
+            <span className="eyebrow">Stack</span>
+            <span className="h-px flex-1 bg-[var(--color-border)]" />
+          </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {SKILLS.map((s) => (
               <div key={s.category} className="card p-6">
@@ -147,7 +145,10 @@ export default function ITPage() {
 
         {/* Projects */}
         <div>
-          <h3 className="subheading mb-6 block">Projects</h3>
+          <div className="mb-8 flex items-center gap-4">
+            <span className="eyebrow">Selected work</span>
+            <span className="h-px flex-1 bg-[var(--color-border)]" />
+          </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {PROJECTS.map((p) => (
               <article
@@ -167,7 +168,7 @@ export default function ITPage() {
                     <IconTrophy className="h-5 w-5" />
                   </span>
                 )}
-                <h4 className="mb-2 pr-12 text-base font-bold text-[var(--color-fg-strong)]">
+                <h4 className="display mb-3 pr-12 text-[1.3rem]" style={{ fontWeight: 700 }}>
                   {p.name}
                 </h4>
                 <p className="mb-4 text-sm leading-relaxed text-[var(--color-muted)]">

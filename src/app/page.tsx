@@ -14,50 +14,40 @@ import photoBike from "@/image/riding_gravel_bike.jpeg";
 import photoProgramming from "@/image/programming.jpeg";
 import {
   IconBike,
-  IconBriefcase,
   IconCode,
   IconCube,
   IconGitHub,
-  IconGraduation,
-  IconKotlin,
   IconLinkedIn,
   IconMail,
-  IconMapPin,
   IconMusic,
   IconRun,
-  IconSwissFlag,
-  IconUser,
+  IconTrophy,
   IconWaves,
 } from "./icons";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
-const QUICK_CARDS: { icon: Icon; label: string; desc: string; href: string }[] = [
+const SECTIONS: { label: string; desc: string; href: string; icon: Icon }[] = [
   {
-    icon: IconCode,
     label: "IT & Projects",
-    desc: "Full-stack, Android, Kotlin DSLs, game dev.",
+    desc: "Full-stack web, Android tooling, Kotlin DSLs and a few games built end to end.",
     href: "/it",
+    icon: IconCode,
   },
   {
-    icon: IconMusic,
     label: "Music",
-    desc: "Guitar, piano, bass, drums. YouTube & Spotify.",
+    desc: "Guitar, piano, bass and drums. Some of my playing on YouTube and Spotify.",
     href: "/music",
-  },
-  {
-    icon: IconUser,
-    label: "About Me",
-    desc: "Interests, sports, and a bit more.",
-    href: "#about",
+    icon: IconMusic,
   },
 ];
 
 const INTERESTS: { icon: Icon; label: string }[] = [
   { icon: IconMusic, label: "Guitar, Piano, Bass, Drums" },
-  { icon: IconBike, label: "Biking & Triathlon" },
+  { icon: IconBike, label: "Biking" },
   { icon: IconWaves, label: "Swimming" },
   { icon: IconRun, label: "Running" },
+  { icon: IconTrophy, label: "Triathlon" },
   { icon: IconCube, label: "Rubik's Cube" },
 ];
 
@@ -185,119 +175,101 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="relative z-10">
       {/* HERO */}
-      <section className="relative flex min-h-[88vh] items-center overflow-hidden px-6 py-16 sm:px-10">
-        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-2 items-center gap-x-6 gap-y-8 md:gap-x-12 md:gap-y-4">
-          <div className="fade-in-up col-start-1 row-start-1">
-            <p className="mb-5 text-[0.78rem] uppercase tracking-[0.14em] text-[var(--color-accent)]">
-              Based in Zürich, Switzerland
-            </p>
-            <h1
-              className="text-[var(--color-fg-strong)]"
-              style={{
-                fontSize: "clamp(2.5rem, 8vw, 6rem)",
-                fontWeight: 700,
-                lineHeight: 0.95,
-                letterSpacing: "-0.04em",
-              }}
-            >
-              Jan
-              <br />
-              <span className="text-[var(--color-accent)]">Sigrist</span>
-            </h1>
+      <section className="px-6 pb-12 pt-10 sm:px-10 sm:pt-16">
+        <div className="mx-auto w-full max-w-[1100px]">
+          <div className="fade-in-up mb-8 flex items-center gap-4">
+            <span className="eyebrow">Software developer · Musician</span>
+            <span className="h-px flex-1 bg-[var(--color-border)]" />
           </div>
 
-          <div className="fade-in-up col-span-2 row-start-2 md:col-span-1 md:col-start-1 md:row-start-2">
-            <p className="mb-8 max-w-md text-base leading-relaxed text-[var(--color-muted)]">
-              Apprentice software developer at Ergon Informatik AG, building
-              full-stack apps, Android tools, and musician on the side.
-            </p>
-            <div className="mb-7 flex flex-wrap gap-3">
-              <Link href="/it" className="btn-primary">
-                View Projects
-              </Link>
-              <Link href="#contact" className="btn-ghost">
-                Get in Touch
-              </Link>
+          <div className="grid grid-cols-1 items-end gap-x-10 gap-y-10 md:grid-cols-[1fr_320px]">
+            <div className="fade-in-up">
+              <div className="flex items-center gap-5 md:block">
+                <h1
+                  className="display"
+                  style={{ fontSize: "clamp(2.5rem, 12vw, 8.5rem)", fontWeight: 800 }}
+                >
+                  Jan
+                  <br />
+                  Sigrist<span className="text-[var(--color-accent)]">.</span>
+                </h1>
+                <div className="relative aspect-square w-28 flex-shrink-0 overflow-hidden rounded-full border border-[var(--color-border-strong)] sm:w-40 md:hidden">
+                  <Image
+                    src={photoPortrait}
+                    alt="Portrait of Jan Sigrist"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 640px) 160px, 112px"
+                    priority
+                  />
+                </div>
+              </div>
+              <p className="mt-8 max-w-xl text-[1.15rem] leading-[1.6] text-[var(--color-text)]">
+                Final-year software apprentice at{" "}
+                <Link
+                  href="https://www.ergon.ch/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--color-accent)] underline decoration-[var(--color-accent-glow)] underline-offset-4 hover:decoration-[var(--color-accent)]"
+                >
+                  Ergon Informatik
+                </Link>{" "}
+                in Zürich. I build full-stack web apps, Android tooling and Kotlin
+                DSLs by day, and play guitar most evenings.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Link href="/it" className="btn-primary">
+                  View projects
+                </Link>
+                <Link href="#contact" className="btn-ghost">
+                  Get in touch
+                </Link>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <Link
-                href="https://github.com/jansigi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-chip"
-              >
-                GitHub
-              </Link>
-              <Link
-                href="https://www.linkedin.com/in/jan-sigrist-870224289/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-chip"
-              >
-                LinkedIn
-              </Link>
-              <Link href="mailto:jan.sigrist@gmx.net" className="social-chip">
-                Email
-              </Link>
-            </div>
-          </div>
 
-          <div
-            className="fade-in relative col-start-2 row-start-1 flex items-center justify-center md:row-span-2 md:min-h-[340px]"
-          >
-            <div
-              className="flex h-[140px] w-[140px] flex-shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-accent)] sm:h-[200px] sm:w-[200px] md:h-60 md:w-60"
-              style={{ boxShadow: "0 0 60px var(--color-accent-glow)" }}
-            >
-              <div className="relative h-[122px] w-[122px] flex-shrink-0 overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:h-[180px] sm:w-[180px] md:h-[216px] md:w-[216px]">
+            <div className="fade-in hidden md:block">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[3px] border border-[var(--color-border-strong)]">
                 <Image
                   src={photoPortrait}
                   alt="Portrait of Jan Sigrist"
                   fill
                   className="object-cover"
+                  sizes="320px"
                   priority
                 />
               </div>
-            </div>
-            <div className="float absolute right-0 top-[10%] hidden items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text)] sm:flex">
-              <IconSwissFlag className="h-4 w-4 rounded-sm" />
-              Zürich
-            </div>
-            <div className="float-delay absolute bottom-[15%] right-[5%] hidden items-center gap-2 rounded-lg border border-[var(--color-accent-dim)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-accent)] sm:flex">
-              <IconKotlin className="h-4 w-4" />
-              Kotlin
-            </div>
-            <div className="float absolute left-[-5%] top-[20%] hidden items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text)] sm:flex">
-              <IconMusic className="h-4 w-4 text-[var(--color-accent)]" />
-              Music
             </div>
           </div>
         </div>
       </section>
 
-      {/* QUICK CARDS */}
-      <section className="px-6 py-12 sm:px-10">
-        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 gap-5 sm:grid-cols-3">
-          {QUICK_CARDS.map((c, i) => {
-            const Icon = c.icon;
+      {/* INDEX */}
+      <section className="px-6 py-10 sm:px-10">
+        <div className="mx-auto w-full max-w-[1100px]">
+          <hr className="rule mb-2" />
+          {SECTIONS.map((s) => {
+            const Icon = s.icon;
             return (
               <Link
-                key={c.label}
-                href={c.href}
-                className={`card card-hover relative block p-8 fade-in-delay-${
-                  i === 0 ? "1" : "2"
-                }`}
+                key={s.label}
+                href={s.href}
+                className="group flex items-center gap-5 border-b border-[var(--color-border)] py-7 transition-colors sm:gap-8"
               >
-                <span className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--color-accent-dim)] text-[var(--color-accent)]">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h3 className="mb-2 text-lg font-bold text-[var(--color-fg-strong)]">{c.label}</h3>
-                <p className="mb-5 text-sm leading-relaxed text-[var(--color-muted)]">
-                  {c.desc}
-                </p>
-                <span className="absolute bottom-6 right-7 text-lg text-[var(--color-accent)]">
+                <Icon className="h-6 w-6 flex-shrink-0 text-[var(--color-muted)] transition-colors group-hover:text-[var(--color-accent)]" />
+                <div className="min-w-0 flex-1">
+                  <h3
+                    className="display text-[clamp(1.6rem,4vw,2.6rem)] transition-colors group-hover:text-[var(--color-accent)]"
+                    style={{ fontWeight: 700 }}
+                  >
+                    {s.label}
+                  </h3>
+                  <p className="mt-1 max-w-md text-[0.95rem] leading-relaxed text-[var(--color-muted)]">
+                    {s.desc}
+                  </p>
+                </div>
+                <span className="flex-shrink-0 text-2xl text-[var(--color-muted)] transition-transform duration-300 group-hover:translate-x-1.5 group-hover:text-[var(--color-accent)]">
                   →
                 </span>
               </Link>
@@ -307,88 +279,44 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="px-6 py-16 sm:px-10">
+      <section id="about" className="px-6 py-20 sm:px-10">
         <div className="mx-auto w-full max-w-[1100px]">
-          <div className="mb-12 fade-in-up">
-            <h2
-              className="mb-3 text-[var(--color-fg-strong)]"
-              style={{
-                fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-              }}
-            >
-              About
-            </h2>
-            <p className="text-base leading-relaxed text-[var(--color-muted)]">
-              A bit about who I am beyond the code.
-            </p>
-          </div>
-
-          <div className="mb-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div className="card p-8">
-              <h3 className="subheading mb-5 block">At a Glance</h3>
-              <ul className="space-y-3.5">
-                <li className="flex items-start gap-3 text-sm text-[var(--color-text)]">
-                  <IconMapPin className="mt-[2px] h-4 w-4 flex-shrink-0 text-[var(--color-accent)]" />
-                  <span>Zürich, Switzerland</span>
-                </li>
-                <li className="flex items-start gap-3 text-sm text-[var(--color-text)]">
-                  <IconBriefcase className="mt-[2px] h-4 w-4 flex-shrink-0 text-[var(--color-accent)]" />
-                  <span>
-                    Apprentice (4th/final year) at{" "}
-                    <Link
-                      href="https://www.ergon.ch/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[var(--color-accent)] hover:underline"
-                    >
-                      Ergon Informatik AG
-                    </Link>
-                  </span>
-                </li>
-                <li className="flex items-start gap-3 text-sm text-[var(--color-text)]">
-                  <IconGraduation className="mt-[2px] h-4 w-4 flex-shrink-0 text-[var(--color-accent)]" />
-                  <span>Finishing apprenticeship in 2026</span>
-                </li>
-              </ul>
+          <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-[200px_1fr]">
+            <div className="fade-in-up">
+              <span className="eyebrow">About</span>
             </div>
 
-            <div className="card p-8">
-              <h3 className="subheading mb-5 block">Interests</h3>
-              <div className="flex flex-col gap-3">
-                {INTERESTS.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div
-                      key={item.label}
-                      className="flex items-center gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)] px-4 py-2.5"
-                    >
-                      <span className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-[var(--color-accent-dim)] text-[var(--color-accent)]">
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      <span className="text-sm text-[var(--color-text)]">
-                        {item.label}
-                      </span>
-                    </div>
-                  );
-                })}
+            <div className="fade-in-up">
+              <p className="text-[1.45rem] leading-[1.55] text-[var(--color-fg-strong)]">
+                I like work that makes me think, and I&apos;ll happily stay on a
+                hard problem until it clicks.
+              </p>
+              <p className="mt-6 text-[1.05rem] leading-[1.8] text-[var(--color-muted)]">
+                Most of my apprenticeship has been real client work: backend
+                services, full-stack web apps and a fair bit of Android. The
+                things I&apos;ve had the most fun with are the fiddly ones, like a
+                type-safe query DSL, an NFC alarm clock that did not want to
+                cooperate, or working out how to solve a Rubik&apos;s Cube.
+              </p>
+
+              <div className="mt-10">
+                <span className="label-mono mb-5 block">Away from the keyboard</span>
+                <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {INTERESTS.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <li
+                        key={item.label}
+                        className="flex items-center gap-3 text-[0.95rem] text-[var(--color-text)]"
+                      >
+                        <Icon className="h-4 w-4 flex-shrink-0 text-[var(--color-muted)]" />
+                        <span>{item.label}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             </div>
-          </div>
-
-          <div className="card p-8">
-            <p className="mb-4 text-[0.96rem] leading-[1.8] text-[var(--color-muted)]">
-              I&apos;m a software apprentice in my final year, working on
-              real-world projects at Ergon Informatik AG. My days are split between
-              backend systems, full-stack web apps, Android development and my evenings
-              often involve a guitar or a bike ride.
-            </p>
-            <p className="text-[0.96rem] leading-[1.8] text-[var(--color-muted)]">
-              I enjoy building things that actually work and solving puzzles,
-              whether that&apos;s a Rubik&apos;s Cube, a database query DSL, or
-              a multi-player grid strategy game.
-            </p>
           </div>
         </div>
       </section>
@@ -396,7 +324,10 @@ export default function Home() {
       {/* PHOTOS */}
       <section className="px-6 py-16 sm:px-10">
         <div className="mx-auto w-full max-w-[1100px]">
-          <h3 className="subheading mb-6 block">Photos</h3>
+          <div className="mb-8 flex items-center gap-4">
+            <span className="eyebrow">Off the clock</span>
+            <span className="h-px flex-1 bg-[var(--color-border)]" />
+          </div>
           <div
             className="relative px-8 sm:px-10 md:px-14"
             onTouchStart={onGridTouchStart}
@@ -415,7 +346,7 @@ export default function Home() {
                   onClick={() =>
                     openLightbox((idx + gridOffset) % galleryImages.length)
                   }
-                  className={`group relative aspect-square overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] transition hover:border-[var(--color-accent-glow)] ${
+                  className={`group relative aspect-square overflow-hidden rounded-[3px] border border-[var(--color-border)] bg-[var(--color-surface)] transition hover:border-[var(--color-border-strong)] ${
                     idx > 0 ? "hidden sm:block" : "block"
                   }`}
                 >
@@ -455,82 +386,67 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="px-6 py-16 sm:px-10">
-        <div className="mx-auto w-full max-w-[640px]">
-          <div className="mb-12 fade-in-up">
-            <h2
-              className="mb-3 text-[var(--color-fg-strong)]"
-              style={{
-                fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-              }}
-            >
-              Get in Touch
-            </h2>
-            <p className="text-base leading-relaxed text-[var(--color-muted)]">
-              Whether you have a question, a project idea, or just want to say
-              hello.
-            </p>
-          </div>
+      <section id="contact" className="px-6 py-20 sm:px-10">
+        <div className="mx-auto w-full max-w-[1100px]">
+          <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-[200px_1fr]">
+            <div className="fade-in-up">
+              <span className="eyebrow">Contact</span>
+            </div>
 
-          <div className="mb-8 flex flex-col gap-4">
-            {(
-              [
-                {
-                  icon: IconMail,
-                  label: "Email",
-                  value: "jan.sigrist@gmx.net",
-                  href: "mailto:jan.sigrist@gmx.net",
-                  external: false,
-                },
-                {
-                  icon: IconLinkedIn,
-                  label: "LinkedIn",
-                  value: "Jan Sigrist",
-                  href: "https://www.linkedin.com/in/jan-sigrist-870224289/",
-                  external: true,
-                },
-                {
-                  icon: IconGitHub,
-                  label: "GitHub",
-                  value: "jansigi",
-                  href: "https://github.com/jansigi",
-                  external: true,
-                },
-              ] satisfies { icon: Icon; label: string; value: string; href: string; external: boolean }[]
-            ).map((c) => {
-              const Icon = c.icon;
-              return (
-                <Link
-                  key={c.label}
-                  href={c.href}
-                  target={c.external ? "_blank" : undefined}
-                  rel={c.external ? "noopener noreferrer" : undefined}
-                  className="card card-hover flex items-center gap-5 px-7 py-6 no-underline"
-                >
-                  <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-dim)] text-[var(--color-accent)]">
-                    <Icon className="h-6 w-6" />
-                  </span>
-                  <div>
-                    <div className="mb-1 text-[0.7rem] uppercase tracking-[0.1em] text-[var(--color-muted)]">
-                      {c.label}
-                    </div>
-                    <div className="font-semibold text-[var(--color-text)]">
-                      {c.value}
-                    </div>
-                  </div>
-                  <span className="ml-auto text-xl text-[var(--color-accent)]">
-                    →
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
+            <div className="fade-in-up">
+              <h2 className="display max-w-2xl text-[clamp(2rem,5vw,3.4rem)]" style={{ fontWeight: 700 }}>
+                Working on something interesting? Let&apos;s talk.
+              </h2>
 
-          <p className="mt-6 text-center text-sm text-[var(--color-muted)]">
-            Based in Zürich. Open to questions, collabs, and new connections.
-          </p>
+              <div className="mt-10 border-t border-[var(--color-border-strong)]">
+                {(
+                  [
+                    {
+                      icon: IconMail,
+                      label: "Email",
+                      value: "jan.sigrist@gmx.net",
+                      href: "mailto:jan.sigrist@gmx.net",
+                      external: false,
+                    },
+                    {
+                      icon: IconLinkedIn,
+                      label: "LinkedIn",
+                      value: "Jan Sigrist",
+                      href: "https://www.linkedin.com/in/jan-sigrist-870224289/",
+                      external: true,
+                    },
+                    {
+                      icon: IconGitHub,
+                      label: "GitHub",
+                      value: "jansigi",
+                      href: "https://github.com/jansigi",
+                      external: true,
+                    },
+                  ] satisfies { icon: Icon; label: string; value: string; href: string; external: boolean }[]
+                ).map((c) => {
+                  const Icon = c.icon;
+                  return (
+                    <Link
+                      key={c.label}
+                      href={c.href}
+                      target={c.external ? "_blank" : undefined}
+                      rel={c.external ? "noopener noreferrer" : undefined}
+                      className="group flex items-center gap-5 border-b border-[var(--color-border)] py-5 no-underline"
+                    >
+                      <Icon className="h-5 w-5 flex-shrink-0 text-[var(--color-muted)] transition-colors group-hover:text-[var(--color-accent)]" />
+                      <span className="label-mono w-24 flex-shrink-0">{c.label}</span>
+                      <span className="text-[1.05rem] text-[var(--color-fg-strong)] transition-colors group-hover:text-[var(--color-accent)]">
+                        {c.value}
+                      </span>
+                      <span className="ml-auto text-lg text-[var(--color-muted)] transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[var(--color-accent)]">
+                        →
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

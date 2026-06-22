@@ -37,20 +37,24 @@ export default function SiteHeader() {
       <nav
         className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 transition-colors sm:px-10 ${
           scrolled
-            ? "border-b border-[var(--color-border)] bg-[var(--color-nav-bg)] backdrop-blur-md"
+            ? "border-b border-[var(--color-border-strong)] bg-[var(--color-nav-bg)] backdrop-blur-md"
             : "border-b border-transparent"
         }`}
       >
         <Link
           href="/"
           onClick={closeMenu}
-          className="text-xl font-bold tracking-tight text-[var(--color-fg-strong)]"
-          style={{ fontFamily: "'DM Mono', monospace", letterSpacing: "-0.03em" }}
+          className="flex items-baseline gap-2 text-[var(--color-fg-strong)]"
         >
-          JS<span className="text-[var(--color-accent)]">.</span>
+          <span
+            className="text-lg"
+            style={{ fontFamily: "var(--font-display)", fontWeight: 700, letterSpacing: "-0.04em" }}
+          >
+            Jan Sigrist
+          </span>
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-7 md:flex">
           {NAV_LINKS.map((l) => {
             const active = isActive(pathname, l.href);
             return (
@@ -58,13 +62,17 @@ export default function SiteHeader() {
                 key={l.href}
                 href={l.href}
                 onClick={closeMenu}
-                className={`rounded-md px-3 py-1.5 text-xs uppercase tracking-[0.08em] transition-colors ${
+                className={`relative py-1 text-[0.78rem] uppercase tracking-[0.14em] transition-colors ${
                   active
-                    ? "bg-[var(--color-accent-dim)] text-[var(--color-accent)]"
-                    : "text-[var(--color-muted)] hover:text-[var(--color-text)]"
+                    ? "text-[var(--color-accent)]"
+                    : "text-[var(--color-muted)] hover:text-[var(--color-fg-strong)]"
                 }`}
+                style={{ fontFamily: "var(--font-mono)" }}
               >
                 {l.label}
+                {active && (
+                  <span className="absolute -bottom-0.5 left-0 h-px w-full bg-[var(--color-accent)]" />
+                )}
               </Link>
             );
           })}
@@ -94,7 +102,7 @@ export default function SiteHeader() {
       </nav>
 
       {menuOpen && (
-        <div className="fixed inset-x-0 top-[64px] z-40 flex flex-col gap-1 border-b border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-3 md:hidden">
+        <div className="fixed inset-x-0 top-[64px] z-40 flex flex-col border-b border-[var(--color-border-strong)] bg-[var(--color-nav-bg)] backdrop-blur-md px-6 py-2 md:hidden">
           {NAV_LINKS.map((l) => {
             const Icon = l.icon;
             const active = isActive(pathname, l.href);
@@ -103,22 +111,18 @@ export default function SiteHeader() {
                 key={l.href}
                 href={l.href}
                 onClick={closeMenu}
-                className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors ${
-                  active
-                    ? "bg-[var(--color-accent-dim)] text-[var(--color-accent)]"
-                    : "text-[var(--color-text)] hover:bg-[var(--color-surface-alt)]"
+                className={`flex items-center gap-4 border-b border-[var(--color-border)] py-4 transition-colors last:border-b-0 ${
+                  active ? "text-[var(--color-accent)]" : "text-[var(--color-text)]"
                 }`}
               >
+                <Icon className="h-4 w-4 flex-shrink-0" />
                 <span
-                  className={`inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md ${
-                    active
-                      ? "bg-[var(--color-accent)] text-[var(--color-bg)]"
-                      : "bg-[var(--color-surface-alt)] text-[var(--color-accent)]"
-                  }`}
+                  className="text-sm uppercase tracking-[0.14em]"
+                  style={{ fontFamily: "var(--font-mono)" }}
                 >
-                  <Icon className="h-4 w-4" />
+                  {l.label}
                 </span>
-                <span>{l.label}</span>
+                {active && <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />}
               </Link>
             );
           })}

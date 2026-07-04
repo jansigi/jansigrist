@@ -19,6 +19,10 @@
   --color-overlay: rgba(12, 14, 20, 0.62);
   --color-scrollbar-thumb: rgba(35, 71, 255, 0.4);
   color-scheme: light;
+
+  /* Motion — strong ease-out curves, shared across themes */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 /* Dark: deep cool charcoal + brighter cobalt */
@@ -76,6 +80,16 @@ body {
 
 a {
   color: inherit;
+}
+
+/* Visible keyboard focus everywhere; never removed, only styled. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Subtle paper grain so flat fills get atmosphere */
@@ -178,6 +192,13 @@ body::before {
   .fade-in-delay-2 {
     animation: none;
   }
+  /* Keep color/opacity feedback, drop positional movement. */
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-ghost:active,
+  .card-hover:hover {
+    transform: none;
+  }
 }
 
 /* ---- Surfaces ---- */
@@ -217,13 +238,16 @@ body::before {
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
+  transition: background 0.2s, color 0.2s, transform 0.16s var(--ease-out);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
 }
 .btn-primary:hover {
   transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: scale(0.97);
 }
 
 .btn-ghost {
@@ -236,7 +260,8 @@ body::before {
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  transition: border-color 0.2s, color 0.2s, background 0.2s,
+    transform 0.16s var(--ease-out);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -244,6 +269,9 @@ body::before {
 .btn-ghost:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
+}
+.btn-ghost:active {
+  transform: scale(0.97);
 }
 
 .social-chip {

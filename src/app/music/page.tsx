@@ -30,7 +30,7 @@ export default function MusicPage() {
 
         {/* Featured video */}
         <div className="mb-6">
-          <div className="relative overflow-hidden rounded-[3px] border border-[var(--color-border)] pb-[56.25%]">
+          <div className="relative overflow-hidden rounded-xl border border-[var(--color-border)] pb-[56.25%]">
             <iframe
               key={activeVideo}
               src={`https://www.youtube.com/embed/${activeVideo}?autoplay=0`}
@@ -89,14 +89,14 @@ export default function MusicPage() {
         {/* Spotify */}
         <div>
           <h3 className="subheading mb-6 block">Spotify</h3>
-          <div className="overflow-hidden rounded-[3px] border border-[var(--color-border)]">
+          <div className="overflow-hidden rounded-xl border border-[var(--color-border)]">
             <iframe
               src="https://open.spotify.com/embed/artist/0lU1CwTbKNiyagnPBawvtk?utm_source=generator&theme=0"
               width="100%"
               height="352"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-              className="block"
+              className="block rounded-xl bg-[var(--color-surface)]"
             />
           </div>
           <p className="mt-3 text-sm text-[var(--color-muted)]">

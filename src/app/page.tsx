@@ -68,7 +68,6 @@ export default function Home() {
   const [gridOffset, setGridOffset] = useState(0);
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
   const [touchDeltaX, setTouchDeltaX] = useState(0);
-  const [lbEntering, setLbEntering] = useState(true);
   const [gridEntering, setGridEntering] = useState(true);
 
   const openLightbox = (index: number) => {
@@ -100,19 +99,6 @@ export default function Home() {
     { length: 4 },
     (_, i) => galleryImages[(i + gridOffset) % galleryImages.length]
   );
-
-  useEffect(() => {
-    if (!lightboxOpen) return;
-    let id2 = 0;
-    const id1 = requestAnimationFrame(() => {
-      setLbEntering(false);
-      id2 = requestAnimationFrame(() => setLbEntering(true));
-    });
-    return () => {
-      cancelAnimationFrame(id1);
-      if (id2) cancelAnimationFrame(id2);
-    };
-  }, [currentIndex, lightboxOpen]);
 
   useEffect(() => {
     let id2 = 0;
@@ -354,7 +340,7 @@ export default function Home() {
                     src={img.src}
                     alt={img.alt}
                     fill
-                    className="object-cover transition-transform duration-200 group-hover:scale-105"
+                    className="object-cover transition-transform duration-200 [@media(hover:hover)]:group-hover:scale-105"
                   />
                 </button>
               ))}
@@ -367,7 +353,7 @@ export default function Home() {
                   (o) => (o - 1 + galleryImages.length) % galleryImages.length
                 )
               }
-              className="pointer-events-auto absolute left-0 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-2xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] sm:h-14 sm:w-14 sm:text-3xl"
+              className="pointer-events-auto absolute left-0 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-2xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] active:scale-90 sm:h-14 sm:w-14 sm:text-3xl"
             >
               ‹
             </button>
@@ -377,7 +363,7 @@ export default function Home() {
               onClick={() =>
                 setGridOffset((o) => (o + 1) % galleryImages.length)
               }
-              className="pointer-events-auto absolute right-0 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-2xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] sm:h-14 sm:w-14 sm:text-3xl"
+              className="pointer-events-auto absolute right-0 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-2xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] active:scale-90 sm:h-14 sm:w-14 sm:text-3xl"
             >
               ›
             </button>
@@ -469,7 +455,7 @@ export default function Home() {
                 e.stopPropagation();
                 closeLightbox();
               }}
-              className="absolute right-3 top-0 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-surface)] text-xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] sm:right-6"
+              className="absolute right-3 top-0 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-surface)] text-xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] active:scale-90 sm:right-6"
               style={{ top: "calc(env(safe-area-inset-top, 0px) + 2px)" }}
             >
               ×
@@ -483,16 +469,15 @@ export default function Home() {
               onTouchEnd={onLightboxTouchEnd}
             >
               <div
-                className={`flex h-full w-full items-center justify-center overflow-hidden rounded-xl bg-transparent transition-all duration-300 ease-out ${
-                  lbEntering && touchDeltaX === 0
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-x-3"
-                }`}
+                className="flex h-full w-full items-center justify-center overflow-hidden rounded-xl bg-transparent"
                 style={{
                   transform:
                     touchDeltaX !== 0
                       ? `translateX(${touchDeltaX}px)`
                       : undefined,
+                  transition: touchStart
+                    ? "none"
+                    : "transform 0.2s var(--ease-out)",
                 }}
               >
                 <Image
@@ -507,7 +492,7 @@ export default function Home() {
                 type="button"
                 aria-label="Previous"
                 onClick={showPrev}
-                className="absolute left-0 top-1/2 z-10 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-2xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] sm:h-14 sm:w-14 sm:text-3xl"
+                className="absolute left-0 top-1/2 z-10 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-2xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] active:scale-90 sm:h-14 sm:w-14 sm:text-3xl"
               >
                 ‹
               </button>
@@ -515,7 +500,7 @@ export default function Home() {
                 type="button"
                 aria-label="Next"
                 onClick={showNext}
-                className="absolute right-0 top-1/2 z-10 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-2xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] sm:h-14 sm:w-14 sm:text-3xl"
+                className="absolute right-0 top-1/2 z-10 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-2xl text-[var(--color-text)] backdrop-blur transition hover:text-[var(--color-accent)] active:scale-90 sm:h-14 sm:w-14 sm:text-3xl"
               >
                 ›
               </button>

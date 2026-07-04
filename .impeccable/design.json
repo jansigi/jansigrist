@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-04T00:00:00Z",
+  "title": "Design System: Jan Sigrist",
+  "extensions": {
+    "colorMeta": {
+      "accent-cobalt": { "role": "primary", "displayName": "Electric Cobalt", "canonical": "#2347ff", "darkValue": "#5d7dff", "tonalRamp": ["#0a1240", "#0f1c66", "#132591", "#1832bd", "#2347ff", "#5d7dff", "#93a8ff", "#c9d3ff"] },
+      "paper-bg": { "role": "neutral", "displayName": "Paper Grey", "canonical": "#f1f2f4", "darkValue": "#0d0e12", "tonalRamp": ["#0d0e12", "#15171d", "#1d1f28", "#3a3d47", "#6a6e7b", "#a2a6b1", "#d3d6dc", "#f1f2f4"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#101218", "darkValue": "#f3f5fb", "tonalRamp": ["#101218", "#2a2d36", "#42454f", "#6a6e7b", "#868b9b", "#b4b8c2", "#d7dae4", "#f3f5fb"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Name lockup and page titles. Bricolage Grotesque 800, massive and tightly tracked." },
+      "headline": { "displayName": "Headline", "purpose": "Section index links and sub-page H1s; shifts to cobalt on hover." },
+      "body": { "displayName": "Body", "purpose": "Reading prose in Newsreader serif, held to a comfortable measure." },
+      "label": { "displayName": "Label / Eyebrow", "purpose": "Mono uppercase structural type: section marks, byline, footer nav, field labels." }
+    },
+    "shadows": [
+      { "name": "card-lift", "value": "0 10px 30px rgba(24,19,11,0.1)", "purpose": "The system's only shadow. Hover response on interactive project cards, paired with a -3px translate. Never at rest." }
+    ],
+    "motion": [
+      { "name": "ease-editorial", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Ease-out-expo for entrance fades (fadeInUp). Calm, decisive, no bounce." },
+      { "name": "duration-entrance", "value": "0.8s", "purpose": "Hero and section fade-in-up entrances." },
+      { "name": "duration-state", "value": "0.2s", "purpose": "Hover/focus colour and transform transitions." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single lead call-to-action (e.g. \"View projects\").",
+      "html": "<button class=\"ds-btn-primary\">View projects</button>",
+      "css": ".ds-btn-primary { font-family: 'DM Mono', ui-monospace, monospace; background: var(--color-accent, #2347ff); color: var(--color-on-accent, #fff); border: 1px solid var(--color-accent, #2347ff); border-radius: 2px; padding: 0.7rem 1.5rem; font-size: 0.8rem; letter-spacing: 0.04em; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s, color 0.2s, transform 0.2s; } .ds-btn-primary:hover { transform: translateY(-1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-accent, #2347ff); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary companion action; hairline stroke that resolves to cobalt on hover.",
+      "html": "<button class=\"ds-btn-ghost\">Get in touch</button>",
+      "css": ".ds-btn-ghost { font-family: 'DM Mono', ui-monospace, monospace; background: transparent; color: var(--color-fg-strong, #101218); border: 1px solid var(--color-border-strong, #12141c42); border-radius: 2px; padding: 0.7rem 1.5rem; font-size: 0.8rem; letter-spacing: 0.04em; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: border-color 0.2s, color 0.2s; } .ds-btn-ghost:hover { border-color: var(--color-accent, #2347ff); color: var(--color-accent, #2347ff); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--color-accent, #2347ff); outline-offset: 2px; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Interactive project/skill card. Flat at rest, lifts on hover.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">DOPE Query Builder</h3><p class=\"ds-card-body\">Type-safe Kotlin DSL for N1QL/SQL++ with a fluent API and compile-time checks.</p><span class=\"ds-tag\">Kotlin</span></div>",
+      "css": ".ds-card { background: var(--color-surface, #f9fafb); border: 1px solid var(--color-border, #12141c21); border-radius: 4px; padding: 1.75rem; transition: transform 0.25s ease, border-color 0.2s ease, box-shadow 0.25s ease; } .ds-card:hover { transform: translateY(-3px); border-color: var(--color-border-strong, #12141c42); box-shadow: 0 10px 30px rgba(24,19,11,0.1); } .ds-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; letter-spacing: -0.02em; color: var(--color-fg-strong, #101218); font-size: 1.4rem; margin: 0 0 0.5rem; } .ds-card-body { font-family: 'Newsreader', Georgia, serif; color: var(--color-muted, #6a6e7b); line-height: 1.6; margin: 0 0 1rem; } .ds-tag { font-family: 'DM Mono', monospace; color: var(--color-muted, #6a6e7b); border: 1px solid var(--color-border, #12141c21); border-radius: 2px; padding: 0.18rem 0.55rem; font-size: 0.68rem; letter-spacing: 0.04em; }"
+    },
+    {
+      "name": "Section Head (Eyebrow + Rule)",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The editorial signature: mono eyebrow followed by a hairline rule filling remaining width. Use deliberately, not on every section.",
+      "html": "<div class=\"ds-sechead\"><span class=\"ds-eyebrow\">Off the clock</span><span class=\"ds-rule\"></span></div>",
+      "css": ".ds-sechead { display: flex; align-items: center; gap: 1rem; } .ds-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-accent, #2347ff); font-weight: 500; } .ds-rule { height: 1px; flex: 1; background: var(--color-border, #12141c21); }"
+    },
+    {
+      "name": "Top Navigation",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Fixed bar, transparent over hero, blurred tint on scroll. Mono labels; active/hover in cobalt.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-active\">Home</a><a class=\"ds-nav-link\">IT</a><a class=\"ds-nav-link\">Music</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 1.5rem; align-items: center; padding: 1rem 2.5rem; background: rgba(241,242,244,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border-strong, #12141c42); } .ds-nav-link { font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.04em; color: var(--color-muted, #6a6e7b); text-decoration: none; cursor: pointer; transition: color 0.2s; } .ds-nav-link:hover, .ds-nav-active { color: var(--color-accent, #2347ff); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Cobalt Broadsheet",
+    "overview": "A personal portfolio built like a well-set newspaper spread, not a marketing page. A grotesque display face sets huge, tight-tracked headlines; a proper reading serif carries the prose; a mono voice handles the small structural type. The whole thing sits on a cool paper-grey with a faint printed grain, and a single electric cobalt does all the pointing. Restraint is the strategy: depth comes from type scale, rule lines, and spacing rhythm rather than shadows or effects, and the one accent is rationed so it always means something. The site reads as one composed voice across two subjects — engineering and music — unified by the same grid, type, and cobalt.",
+    "keyCharacteristics": [
+      "Editorial three-voice type system: grotesque display, reading serif, mono labels",
+      "Cool paper-grey canvas with a subtle printed grain, full dark-mode counterpart",
+      "One rationed cobalt accent as the only chromatic voice",
+      "Sharp corners (2-4px) and thin rule lines instead of soft cards and shadows",
+      "Depth from type scale and whitespace, not elevation"
+    ],
+    "rules": [
+      { "name": "The One Cobalt Rule", "body": "Cobalt is the only saturated colour on the page and never exceeds ~10% of any screen. It marks interaction and emphasis, nothing else. If a second accent hue is tempting, the answer is no.", "section": "colors" },
+      { "name": "The Cool-Not-Cream Rule", "body": "The neutral field is deliberately cool grey (#f1f2f4), never a warm cream/sand/paper tint. Warmth is banned from the canvas; personality comes from type and the cobalt.", "section": "colors" },
+      { "name": "The Three-Voice Rule", "body": "Every piece of text is display (Bricolage), reading (Newsreader), or structural (DM Mono). No fourth font, and no borrowing a voice for the wrong job.", "section": "typography" },
+      { "name": "The Rationed Eyebrow Rule", "body": "The mono uppercase eyebrow is a deliberate byline, not reflexive scaffolding above every heading. When in doubt, let the headline and a rule line carry the section.", "section": "typography" },
+      { "name": "The Flat-At-Rest Rule", "body": "Surfaces are flat until touched. The only shadow (card-lift) exists solely as a hover response on interactive cards. A shadow on a static element is forbidden.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep cobalt (#2347ff) as the single accent, rationed to <=10% of any screen — links, states, emphasis only.",
+      "Do set every text element in one of the three voices: Bricolage display, Newsreader body, DM Mono labels.",
+      "Do keep the canvas cool grey (#f1f2f4) and let the printed grain carry atmosphere.",
+      "Do convey depth with type scale, rule lines, and whitespace — surfaces stay flat at rest.",
+      "Do keep corners sharp (2-4px) across buttons, chips, cards, and image tiles.",
+      "Do honour prefers-reduced-motion and keep body text >=4.5:1 in both themes.",
+      "Do hold reading prose to ~max-w-xl for a comfortable measure."
+    ],
+    "donts": [
+      "Don't ship a generic SaaS/startup template — no hero-metric card walls, no gradient buttons, no icon-heading-blurb card grids.",
+      "Don't let it read corporate or stiff — keep the first-person, dry voice.",
+      "Don't go cluttered or try-hard — effects never pile up; motion and blur must earn their place.",
+      "Don't settle for bland or forgettable — if it could be anyone's site, it has failed.",
+      "Don't introduce a second accent hue, warm the canvas toward cream/sand, or add gradient text.",
+      "Don't put a resting drop-shadow on any surface; the only shadow is the interactive-card hover lift.",
+      "Don't paste the mono eyebrow above every section — it's a deliberate byline, not default scaffolding.",
+      "Don't use border-left/border-right colour stripes as accents; use full borders, background tints, or nothing."
+    ]
+  }
+}
